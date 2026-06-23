@@ -65,7 +65,7 @@ em { color: var(--coral); font-style: normal; }
 .photo-placeholder { position: relative; display: grid; height: 540px; overflow: hidden; place-items: center; border: 2px solid var(--ink); border-radius: 48% 48% 22px 22px; background: #b8d4cb; }
 .photo-placeholder__shape { position: absolute; width: 72%; aspect-ratio: 1; border-radius: 50% 50% 42% 58%; background: var(--green); transform: translateY(28%); }
 .photo-placeholder p { position: relative; z-index: 1; margin: 0; color: var(--lime); font-family: var(--display); font-size: 31px; line-height: 1.25; text-align: center; transform: rotate(-6deg); }
-.photo-placeholder img, .hero__visual > img { width: 100%; height: 540px; object-fit: cover; object-position: 50% 48%; border: 2px solid var(--ink); border-radius: 48% 48% 22px 22px; }
+.photo-placeholder img, .hero__visual > img { width: 100%; height: 540px; object-fit: cover; object-position: 50% 50%; border: 2px solid var(--ink); border-radius: 48% 48% 22px 22px; }
 .sticker { position: absolute; display: grid; place-items: center; border: 2px solid var(--ink); font-family: var(--display); text-align: center; }
 .sticker--top { top: 8%; right: -38px; width: 112px; aspect-ratio: 1; border-radius: 50%; background: var(--lime); font-size: 14px; transform: rotate(9deg); }
 .sticker--bottom { bottom: -24px; left: -46px; width: 128px; height: 96px; border-radius: 50%; background: var(--coral); color: #fff; font-size: 19px; line-height: 1.1; transform: rotate(-10deg); }
@@ -84,8 +84,13 @@ em { color: var(--coral); font-style: normal; }
 .credentials span { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; font-weight: 700; }
 .about-personal { margin-top: 24px; padding: 22px 25px; border-left: 4px solid var(--coral); background: #fff0e9; }
 .about-personal p { margin: 0; }
-.about-photo { height: 390px; margin: 28px 0 0; overflow: hidden; border: 2px solid var(--ink); border-radius: var(--radius); }
-.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
+.about-gallery { display: grid; grid-template-columns: 1.15fr .85fr .85fr; gap: 12px; margin-top: 28px; }
+.about-gallery figure { position: relative; height: 330px; margin: 0; overflow: hidden; border: 2px solid var(--ink); border-radius: 22px; background: var(--cream); }
+.about-gallery img { width: 100%; height: 100%; object-fit: cover; }
+.about-gallery figure:first-child img { object-position: 50% 52%; }
+.about-gallery figure:nth-child(2) img { object-position: 50% 42%; }
+.about-gallery figure:nth-child(3) img { object-position: 50% 38%; }
+.about-gallery figcaption { position: absolute; inset: auto 10px 10px; padding: 8px 10px; border-radius: 12px; background: rgba(30, 38, 34, .82); color: #fff; font-size: 11px; font-weight: 700; line-height: 1.3; backdrop-filter: blur(8px); }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 50px; margin-bottom: 54px; }
 .section-heading h2 { margin-bottom: 0; }
 .section-heading > p { max-width: 390px; margin-bottom: 4px; color: var(--muted); font-size: 17px; }
@@ -145,11 +150,14 @@ em { color: var(--coral); font-style: normal; }
 .journey__steps span { display: grid; width: 38px; height: 38px; margin-bottom: 62px; place-items: center; border-radius: 50%; background: var(--coral); color: #fff; font-family: var(--display); font-size: 11px; }
 .journey__steps h3 { margin-bottom: 10px; }
 .journey__steps p { margin: 0; color: var(--muted); font-size: 14px; }
+.journey__aside { display: grid; grid-template-columns: 1fr 108px; align-items: end; max-width: 480px; gap: 18px; }
+.journey__aside p { margin: 0 0 4px; color: var(--muted); font-size: 17px; }
+.journey__aside img { width: 108px; height: 145px; object-fit: cover; object-position: 50% 48%; border: 2px solid var(--ink); border-radius: 50% 50% 16px 16px; transform: rotate(3deg); }
 
 .reviews { background: var(--lime); }
 .reviews__heading { align-items: end; }
 .reviews__portrait { flex: 0 0 210px; height: 250px; margin: 0 28px 0 0; overflow: hidden; border: 2px solid var(--ink); border-radius: 50% 50% 24px 24px; background: var(--paper); transform: rotate(3deg); }
-.reviews__portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.reviews__portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 68%; }
 .reviews__grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; }
 .review { margin: 0; padding: 30px; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--paper); }
 .review--large { grid-row: span 3; display: flex; flex-direction: column; justify-content: space-between; }
@@ -225,6 +233,8 @@ details p { max-width: 620px; margin: -5px 0 24px; color: var(--muted); }
   .hero__content { max-width: 760px; }
   .hero__visual { width: min(480px, 90%); margin-inline: auto; }
   .intro__grid, .club__grid, .faq__grid, .contact__grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-gallery { grid-template-columns: 1.2fr .8fr; }
+  .about-gallery figure:last-child { grid-column: 1 / -1; height: 260px; }
   .reviews__portrait { margin-right: 0; }
   .club__title { position: static; }
   .results__grid { grid-template-columns: 1fr; }
@@ -247,7 +257,7 @@ details p { max-width: 620px; margin: -5px 0 24px; color: var(--muted); }
   .btn { width: 100%; }
   .hero__proof { margin-top: 30px; }
   .photo-placeholder, .photo-placeholder img, .hero__visual > img { height: 410px; }
-  .hero__visual > img { object-position: 50% 48%; }
+  .hero__visual > img { object-position: 50% 50%; }
   .photo-placeholder p { font-size: 25px; }
   .sticker--top { right: -13px; width: 92px; font-size: 11px; }
   .sticker--bottom { left: -10px; width: 108px; height: 82px; font-size: 16px; }
@@ -255,8 +265,13 @@ details p { max-width: 620px; margin: -5px 0 24px; color: var(--muted); }
   .intro__grid { gap: 20px; }
   .intro__copy { grid-template-columns: 1fr; gap: 16px; font-size: 16px; }
   .credentials { grid-template-columns: 1fr; }
-  .about-photo { height: 340px; }
+  .about-gallery { grid-template-columns: 1fr 1fr; gap: 9px; }
+  .about-gallery figure { height: 250px; }
+  .about-gallery figure:last-child { height: 230px; }
+  .about-gallery figcaption { inset: auto 7px 7px; font-size: 10px; }
   .section-heading { align-items: flex-start; flex-direction: column; gap: 20px; margin-bottom: 36px; }
+  .journey__aside { grid-template-columns: 1fr 86px; align-items: center; }
+  .journey__aside img { width: 86px; height: 112px; }
   .reviews__portrait { width: 170px; height: 205px; }
   .format-card { grid-template-columns: 38px 1fr; gap: 12px; padding: 30px 0; }
   .format-card:hover { padding-inline: 0; }
