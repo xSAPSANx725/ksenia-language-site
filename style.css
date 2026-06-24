@@ -65,7 +65,7 @@ em { color: var(--coral); font-style: normal; }
 .photo-placeholder { position: relative; display: grid; height: 540px; overflow: hidden; place-items: center; border: 2px solid var(--ink); border-radius: 48% 48% 22px 22px; background: #b8d4cb; }
 .photo-placeholder__shape { position: absolute; width: 72%; aspect-ratio: 1; border-radius: 50% 50% 42% 58%; background: var(--green); transform: translateY(28%); }
 .photo-placeholder p { position: relative; z-index: 1; margin: 0; color: var(--lime); font-family: var(--display); font-size: 31px; line-height: 1.25; text-align: center; transform: rotate(-6deg); }
-.photo-placeholder img, .hero__visual > img { width: 100%; height: 540px; object-fit: cover; object-position: 50% 50%; border: 2px solid var(--ink); border-radius: 48% 48% 22px 22px; }
+.photo-placeholder img, .hero__visual > img { width: 100%; height: 540px; object-fit: cover; object-position: 50% 43%; border: 2px solid var(--ink); border-radius: 48% 48% 22px 22px; }
 .sticker { position: absolute; display: grid; place-items: center; border: 2px solid var(--ink); font-family: var(--display); text-align: center; }
 .sticker--top { top: 8%; right: -38px; width: 112px; aspect-ratio: 1; border-radius: 50%; background: var(--lime); font-size: 14px; transform: rotate(9deg); }
 .sticker--bottom { bottom: -24px; left: -46px; width: 128px; height: 96px; border-radius: 50%; background: var(--coral); color: #fff; font-size: 19px; line-height: 1.1; transform: rotate(-10deg); }
@@ -144,7 +144,7 @@ em { color: var(--coral); font-style: normal; }
 .results__grid p { margin: 0; color: var(--muted); }
 
 .journey { background: var(--paper); }
-.journey__steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.journey__steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 54px; }
 .journey__steps article { min-height: 285px; padding: 25px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--cream); }
 .journey__steps article:nth-child(even) { margin-top: 40px; background: #e5eddb; }
 .journey__steps span { display: grid; width: 38px; height: 38px; margin-bottom: 62px; place-items: center; border-radius: 50%; background: var(--coral); color: #fff; font-family: var(--display); font-size: 11px; }
@@ -153,11 +153,19 @@ em { color: var(--coral); font-style: normal; }
 .journey__aside { display: grid; grid-template-columns: 1fr 108px; align-items: end; max-width: 480px; gap: 18px; }
 .journey__aside p { margin: 0 0 4px; color: var(--muted); font-size: 17px; }
 .journey__aside img { width: 108px; height: 145px; object-fit: cover; object-position: 50% 48%; border: 2px solid var(--ink); border-radius: 50% 50% 16px 16px; transform: rotate(3deg); }
+.lesson-gallery__title { margin-bottom: 20px; font-family: var(--display); font-size: clamp(24px, 3vw, 36px); }
+.lesson-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.lesson-gallery figure { position: relative; height: 320px; margin: 0; overflow: hidden; border: 2px solid var(--ink); border-radius: 24px; background: #e5eddb; }
+.lesson-gallery__wide { grid-column: span 2; }
+.lesson-gallery img { width: 100%; height: 100%; object-fit: cover; }
+.lesson-gallery__wide img { object-position: 50% 50%; }
+.lesson-gallery figure:not(.lesson-gallery__wide) img { object-position: 50% 42%; }
+.lesson-gallery figcaption { position: absolute; inset: auto 12px 12px; padding: 9px 12px; border-radius: 12px; background: rgba(30, 38, 34, .84); color: #fff; font-size: 12px; font-weight: 700; line-height: 1.35; backdrop-filter: blur(8px); }
 
 .reviews { background: var(--lime); }
 .reviews__heading { align-items: end; }
-.reviews__portrait { flex: 0 0 210px; height: 250px; margin: 0 28px 0 0; overflow: hidden; border: 2px solid var(--ink); border-radius: 50% 50% 24px 24px; background: var(--paper); transform: rotate(3deg); }
-.reviews__portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 68%; }
+.reviews__portrait { flex: 0 0 300px; height: 225px; margin: 0 28px 0 0; overflow: hidden; border: 2px solid var(--ink); border-radius: 38% 38% 24px 24px; background: var(--paper); transform: rotate(3deg); }
+.reviews__portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 26%; }
 .reviews__grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; }
 .review { margin: 0; padding: 30px; border: 2px solid var(--ink); border-radius: var(--radius); background: var(--paper); }
 .review--large { grid-row: span 3; display: flex; flex-direction: column; justify-content: space-between; }
@@ -236,6 +244,8 @@ details p { max-width: 620px; margin: -5px 0 24px; color: var(--muted); }
   .about-gallery { grid-template-columns: 1.2fr .8fr; }
   .about-gallery figure:last-child { grid-column: 1 / -1; height: 260px; }
   .reviews__portrait { margin-right: 0; }
+  .lesson-gallery { grid-template-columns: 1fr 1fr; }
+  .lesson-gallery__wide { grid-column: 1 / -1; }
   .club__title { position: static; }
   .results__grid { grid-template-columns: 1fr; }
   .journey__steps { grid-template-columns: 1fr 1fr; }
@@ -257,7 +267,7 @@ details p { max-width: 620px; margin: -5px 0 24px; color: var(--muted); }
   .btn { width: 100%; }
   .hero__proof { margin-top: 30px; }
   .photo-placeholder, .photo-placeholder img, .hero__visual > img { height: 410px; }
-  .hero__visual > img { object-position: 50% 50%; }
+  .hero__visual > img { object-position: 50% 42%; }
   .photo-placeholder p { font-size: 25px; }
   .sticker--top { right: -13px; width: 92px; font-size: 11px; }
   .sticker--bottom { left: -10px; width: 108px; height: 82px; font-size: 16px; }
@@ -272,7 +282,12 @@ details p { max-width: 620px; margin: -5px 0 24px; color: var(--muted); }
   .section-heading { align-items: flex-start; flex-direction: column; gap: 20px; margin-bottom: 36px; }
   .journey__aside { grid-template-columns: 1fr 86px; align-items: center; }
   .journey__aside img { width: 86px; height: 112px; }
-  .reviews__portrait { width: 170px; height: 205px; }
+  .lesson-gallery__title { margin-bottom: 16px; font-size: 24px; }
+  .lesson-gallery { gap: 9px; }
+  .lesson-gallery figure { height: 245px; border-radius: 18px; }
+  .lesson-gallery__wide { height: 215px !important; }
+  .lesson-gallery figcaption { inset: auto 7px 7px; padding: 7px 9px; font-size: 10px; }
+  .reviews__portrait { width: 230px; height: 175px; }
   .format-card { grid-template-columns: 38px 1fr; gap: 12px; padding: 30px 0; }
   .format-card:hover { padding-inline: 0; }
   .format-card--club, .format-card--club:hover { padding: 28px 20px; }
@@ -283,6 +298,7 @@ details p { max-width: 620px; margin: -5px 0 24px; color: var(--muted); }
   .club__schedule { grid-template-columns: 1fr; }
   .club__quote { margin-top: 80px; }
   .journey__steps, .reviews__grid { grid-template-columns: 1fr; }
+  .journey__steps { margin-top: 38px; }
   .journey__steps article { min-height: 230px; }
   .journey__steps span { margin-bottom: 36px; }
   .review--large { grid-row: auto; }
