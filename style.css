@@ -232,7 +232,8 @@ details p { max-width: 620px; margin: -5px 0 24px; color: var(--muted); }
 
 @media (max-width: 920px) {
   .section { padding: 82px 0; }
-  .nav { position: fixed; inset: 76px 0 0; display: none; flex-direction: column; align-items: flex-start; gap: 8px; padding: 32px 20px; background: var(--cream); font-family: var(--display); font-size: 24px; }
+  .header.scrolled { background: var(--cream); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .nav { position: fixed; inset: 76px 0 0; display: none; flex-direction: column; align-items: flex-start; gap: 8px; overflow-y: auto; overscroll-behavior: contain; padding: 32px 20px; background: var(--cream); font-family: var(--display); font-size: 24px; -webkit-overflow-scrolling: touch; }
   .nav.active { display: flex; }
   .nav a { width: 100%; padding: 14px 0; border-bottom: 1px solid var(--line); }
   .header__cta { display: none; }
