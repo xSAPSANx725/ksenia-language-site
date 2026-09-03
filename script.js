@@ -6,6 +6,7 @@ const formNote = document.getElementById("formNote");
 const directionSelect = document.getElementById("direction");
 const submitButton = leadForm.querySelector('button[type="submit"]');
 const defaultButtonText = submitButton.innerHTML;
+const assistantUrl = "https://t.me/lsenia_language_assistant_bot?start=site_form";
 
 function closeMenu() {
   nav.classList.remove("active");
@@ -98,9 +99,10 @@ leadForm.addEventListener("submit", async (event) => {
 
   if (!endpointIsConfigured) {
     setFormStatus(
-      "Онлайн-отправка ещё настраивается. Пока напиши Ксении в Telegram: @languagetutorksu",
-      "error"
+      "Открываю Telegram-ассистента. Он поможет передать заявку Ксении.",
+      "success"
     );
+    window.location.href = assistantUrl;
     return;
   }
 
@@ -122,7 +124,7 @@ leadForm.addEventListener("submit", async (event) => {
     setFormStatus("Готово! Заявка отправлена. Ксения скоро ответит.", "success");
   } catch (error) {
     setFormStatus(
-      "Не получилось отправить заявку. Попробуй ещё раз или напиши в Telegram: @languagetutorksu",
+      "Не получилось отправить заявку. Попробуй ещё раз или напиши ассистенту в Telegram.",
       "error"
     );
   } finally {
