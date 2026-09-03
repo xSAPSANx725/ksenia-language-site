@@ -6,7 +6,7 @@ const formNote = document.getElementById("formNote");
 const directionSelect = document.getElementById("direction");
 const submitButton = leadForm.querySelector('button[type="submit"]');
 const defaultButtonText = submitButton.innerHTML;
-const assistantUrl = "https://t.me/lsenia_language_assistant_bot?start=site_form";
+const assistantUrl = "https://t.me/lsenia_language_assistant_bot";
 
 function closeMenu() {
   nav.classList.remove("active");
@@ -84,42 +84,7 @@ function setFormStatus(message, type = "") {
 
 function setSubmitting(isSubmitting) {
   submitButton.disabled = isSubmitting;
-  submitButton.innerHTML = isSubmitting ? "Готовлю заявку…" : defaultButtonText;
-}
-
-function getFieldValue(name) {
-  return leadForm.elements[name]?.value.trim() || "";
-}
-
-function buildLeadMessage() {
-  const direction = getFieldValue("direction") || "не выбран";
-  const message = getFieldValue("message") || "не указана";
-
-  return [
-    "Новая заявка с сайта Ксении",
-    "",
-    `Имя: ${getFieldValue("name")}`,
-    `Формат: ${direction}`,
-    `Контакт: ${getFieldValue("contact")}`,
-    `Цель: ${message}`
-  ].join("\n");
-}
-
-async function copyText(text) {
-  if (navigator.clipboard && window.isSecureContext) {
-    await navigator.clipboard.writeText(text);
-    return;
-  }
-
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  textarea.setAttribute("readonly", "");
-  textarea.style.position = "fixed";
-  textarea.style.top = "-9999px";
-  document.body.append(textarea);
-  textarea.select();
-  document.execCommand("copy");
-  textarea.remove();
+  submitButton.innerHTML = isSubmitting ? "Открываю ассистента…" : defaultButtonText;
 }
 
 leadForm.addEventListener("submit", async (event) => {
@@ -129,21 +94,11 @@ leadForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  const leadMessage = buildLeadMessage();
-
   setSubmitting(true);
-  setFormStatus("Готовлю заявку для Telegram-ассистента…");
+  setFormStatus("Открываю Telegram-ассистента. Он задаст вопросы и передаст заявку Ксении.", "success");
 
-  try {
-    await copyText(leadMessage);
-    setFormStatus("Заявка скопирована. Открываю Telegram-ассистента — вставь текст в чат и отправь.", "success");
-    setTimeout(() => {
-      window.location.href = assistantUrl;
-    }, 600);
-  } catch (error) {
-    window.prompt("Скопируй заявку и отправь её Telegram-ассистенту:", leadMessage);
+  setTimeout(() => {
     window.location.href = assistantUrl;
-  } finally {
     setSubmitting(false);
-  }
+  }, 500);
 });
