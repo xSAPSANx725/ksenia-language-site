@@ -84,7 +84,42 @@ function setFormStatus(message, type = "") {
 
 function setSubmitting(isSubmitting) {
   submitButton.disabled = isSubmitting;
-  submitButton.innerHTML = isSubmitting ? "Отправляю…" : defaultButtonText;
+  submitButton.innerHTML = isSubmitting ? "Готовлю заявку…" : defaultButtonText;
+}
+
+function getFieldValue(name) {
+  return leadForm.elements[name]?.value.trim() || "";
+}
+
+function buildLeadMessage() {
+  const direction = getFieldValue("direction") || "не выбран";
+  const message = getFieldValue("message") || "не указана";
+
+  return [
+    "Новая заявка с сайта Ксении",
+    "",
+    `Имя: ${getFieldValue("name")}`,
+    `Формат: ${direction}`,
+    `Контакт: ${getFieldValue("contact")}`,
+    `Цель: ${message}`
+  ].join("\n");
+}
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.top = "-9999px";
+  document.body.append(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
 }
 
 leadForm.addEventListener("submit", async (event) => {
@@ -94,39 +129,20 @@ leadForm.addEventListener("submit", async (event) => {
     return;
   }
 
-  const endpoint = leadForm.action;
-  const endpointIsConfigured = !endpoint.includes("REPLACE_WITH_FORM_ID");
-
-  if (!endpointIsConfigured) {
-    setFormStatus(
-      "Открываю Telegram-ассистента. Он поможет передать заявку Ксении.",
-      "success"
-    );
-    window.location.href = assistantUrl;
-    return;
-  }
+  const leadMessage = buildLeadMessage();
 
   setSubmitting(true);
-  setFormStatus("Отправляю заявку…");
+  setFormStatus("Готовлю заявку для Telegram-ассистента…");
 
   try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      body: new FormData(leadForm),
-      headers: { Accept: "application/json" }
-    });
-
-    if (!response.ok) {
-      throw new Error("Formspree request failed");
-    }
-
-    leadForm.reset();
-    setFormStatus("Готово! Заявка отправлена. Ксения скоро ответит.", "success");
+    await copyText(leadMessage);
+    setFormStatus("Заявка скопирована. Открываю Telegram-ассистента — вставь текст в чат и отправь.", "success");
+    setTimeout(() => {
+      window.location.href = assistantUrl;
+    }, 600);
   } catch (error) {
-    setFormStatus(
-      "Не получилось отправить заявку. Попробуй ещё раз или напиши ассистенту в Telegram.",
-      "error"
-    );
+    window.prompt("Скопируй заявку и отправь её Telegram-ассистенту:", leadMessage);
+    window.location.href = assistantUrl;
   } finally {
     setSubmitting(false);
   }

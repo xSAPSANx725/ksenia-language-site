@@ -302,8 +302,7 @@
           </div>
         </div>
 
-        <!-- FORMSPREE: создайте форму и замените REPLACE_WITH_FORM_ID на ID из её endpoint -->
-        <form class="form" id="leadForm" action="https://formspree.io/f/REPLACE_WITH_FORM_ID" method="POST" data-formspree-placeholder>
+        <form class="form" id="leadForm">
           <input type="hidden" name="_subject" value="Новая заявка с сайта Ксении">
           <label>Как тебя зовут?
             <input type="text" name="name" autocomplete="name" placeholder="Имя" required>
@@ -329,8 +328,8 @@
             <input type="checkbox" name="consent" value="yes" required>
             <span>Соглашаюсь на обработку данных согласно <a href="#privacy">политике конфиденциальности</a>.</span>
           </label>
-          <button class="btn btn--dark" type="submit">Отправить заявку <span>↗</span></button>
-          <p class="form__note" id="formNote" role="status" aria-live="polite">Обычно я отвечаю в течение дня.</p>
+          <button class="btn btn--dark" type="submit">Отправить через ассистента <span>↗</span></button>
+          <p class="form__note" id="formNote" role="status" aria-live="polite">После отправки откроется Telegram-ассистент с готовой заявкой.</p>
         </form>
       </div>
     </section>
@@ -338,7 +337,7 @@
     <section class="privacy" id="privacy">
       <div class="container privacy__inner">
         <h2>Политика конфиденциальности</h2>
-        <p>Данные из формы используются только для ответа на заявку и подбора формата занятий. Ксения не передаёт их третьим лицам, кроме сервиса Formspree, который технически доставляет сообщение. Отправляя форму, ты соглашаешься на обработку указанных имени, контакта и комментария. Чтобы удалить данные или отозвать согласие, напиши в <a href="https://t.me/languagetutorksu" target="_blank" rel="noopener noreferrer">Telegram</a>.</p>
+        <p>Данные из формы используются только для ответа на заявку и подбора формата занятий. При отправке форма открывает Telegram-ассистента, чтобы передать Ксении указанные имя, контакт, выбранный формат и комментарий. Чтобы удалить данные или отозвать согласие, напиши в <a href="https://t.me/languagetutorksu" target="_blank" rel="noopener noreferrer">Telegram</a>.</p>
       </div>
     </section>
   </main>
@@ -350,6 +349,6 @@
       <div class="footer__links"><a href="#privacy">Конфиденциальность</a><a href="#top">Наверх ↑</a></div>
     </div>
   </footer>
-  <script src="script.js?v=20260903-1"></script>
+  <script src="script.js?v=20260903-2"></script>
 </body>
 </html>
