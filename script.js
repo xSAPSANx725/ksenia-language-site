@@ -7,6 +7,7 @@ const directionSelect = document.getElementById("direction");
 const submitButton = leadForm.querySelector('button[type="submit"]');
 const defaultButtonText = submitButton.innerHTML;
 const assistantUrl = "https://t.me/lsenia_language_assistant_bot";
+const leadEndpoint = "https://ksenia-language-assistant-backend.mossy-fir-8154.chatgpt.site/lead";
 
 function closeMenu() {
   nav.classList.remove("active");
@@ -84,7 +85,7 @@ function setFormStatus(message, type = "") {
 
 function setSubmitting(isSubmitting) {
   submitButton.disabled = isSubmitting;
-  submitButton.innerHTML = isSubmitting ? "Открываю ассистента…" : defaultButtonText;
+  submitButton.innerHTML = isSubmitting ? "Отправляю заявку…" : defaultButtonText;
 }
 
 leadForm.addEventListener("submit", async (event) => {
@@ -95,10 +96,30 @@ leadForm.addEventListener("submit", async (event) => {
   }
 
   setSubmitting(true);
-  setFormStatus("Открываю Telegram-ассистента. Он задаст вопросы и передаст заявку Ксении.", "success");
 
-  setTimeout(() => {
-    window.location.href = assistantUrl;
+  try {
+    const formData = new FormData(leadForm);
+    const payload = Object.fromEntries(formData.entries());
+
+    const response = await fetch(leadEndpoint, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error("Lead request failed");
+    }
+
+    leadForm.reset();
+    setFormStatus("Готово! Заявка отправлена Ксении в Telegram.", "success");
+  } catch (error) {
+    setFormStatus(
+      "Не получилось отправить заявку автоматически. Открой Telegram-ассистента и напиши там.",
+      "error"
+    );
+    window.open(assistantUrl, "_blank", "noopener,noreferrer");
+  } finally {
     setSubmitting(false);
-  }, 500);
+  }
 });
